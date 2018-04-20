@@ -1,0 +1,194 @@
+.container {
+  position: absolute;
+  top: 25%;
+  /* half of #content height*/
+  width: 100%;
+
+}
+
+.content {
+  text-align: center;
+}
+
+.item {
+}
+
+.accept {
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: #28323C;
+  padding: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  margin: 10px;
+}
+
+/*
+
+.footer {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left:0;
+  right: 0;
+  height: 50px;
+}
+
+.footer_content {
+  margin: auto;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
+.footer_content img {
+  height: 100%;
+}
+*/
+
+footer {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.footer {
+  display: flex;
+  height: 50px;
+  margin: auto;
+  align-items: center;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.footer img {
+  height: 100%;
+}
+
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+  color: #fff;
+}
+
+.spinner > div {
+  background-color: #fff;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4)
+  }
+  20% {
+    -webkit-transform: scaleY(1.0)
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+.pending {
+  padding: 10px;
+
+}
+
+.paid {
+  padding: 10px;
+}
+
+.order_info {
+  display: flex;
+  justify-content: center;
+  width: 320px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.order_line {
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.address {
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: #28323C;
+  border-radius: 5px;
+  width: 120%;
+}
+
+
+.prices_box {
+  display: flex;
+  width: 300px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.prices_line {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+
+
+@media screen
+and (min-width: 120px)
+and (max-width: 320px)
+{
+  .prices_box {
+    width: 95%;
+  }
+
+}
+

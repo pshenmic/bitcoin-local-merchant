@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="content" *ngIf="pathError">
+    Wrong URL!
+  </div>
+  <div class="content" *ngIf="product && !pathError">
+    <div class="item">
+      <div class="prices_box" *ngIf="operationPrice && !ordered">
+        <p>{{product.name}} ({{product.price}} RUB)</p>
+
+        <div class="prices_line">
+          <span>Price of {{product.name}}: </span>
+          <span>{{product.price}} (RUB)</span>
+        </div>
+        <div class="prices_line">
+          <span>BTC Rate: </span>
+          <span>{{operationPrice.btcRate}} (RUB)</span>
+        </div>
+        <div class="prices_line">
+          <span>Final BTC amount:</span>
+          <span>{{operationPrice.btcPrice}}</span>
+        </div>
+        <button class="accept" (click)="makeOrder(orderId)">
+          Accept & Pay
+        </button>
+      </div>
+
+      <div *ngIf="ordered">
+        <div *ngIf="ordered && !order && !error">
+          <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+        </div>
+        <div *ngIf="ordered && !order && error">
+          <p>
+            Sorry! Service is currently unavailable. Try again later.
+          </p>
+        </div>
+
+        <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown()">
+          <div style="padding: 10px">
+            <span>Price of {{product.name}}:</span>
+            <p style="margin: 5px">
+              <span style="font-size: 2em">{{order.price}} (RUB)</span>
+            </p>
+            <div class="order_info">
+              <div class="order_line">
+                <span>BTC rate:</span>
+                <span>{{order.btcRate}} (RUB)</span>
+              </div>
+              <div class="order_line">
+                <span>Final BTC amount:</span>
+                <span>{{order.btcAmount}}</span>
+              </div>
+              <div class="order_line address">
+                <span>{{order.address}}</span>
+              </div>
+            </div><!--
+            <p>ID: {{order.id}}</p>
+            <p>BTC rate: {{order.btcRate}} (RUB)</p>
+            <p>Final BTC to pay: {{order.btcAmount}}</p>
+            <p>Address: {{order.address}}</p>
+            <p>Status: {{order.status}}</p>-->
+          </div>
+        </div>
+
+        <div class="pending" *ngIf="isPending()">
+          <div style="display:inline-block">
+            <div>Your order is pending.</div>
+            <p>Please, pay to the address <b>exactly</b> given amount.</p>
+          </div>
+        </div>
+        <div class="pending" *ngIf="isExpired()">
+          <p>Sorry, your payment request is expired.</p>
+          <p>Create new order.</p>
+        </div>
+        <div class="paid" *ngIf="isPaid()">
+          <p>Payment has been successfully confirmed.</p>
+          <p>Thank you for your choice!</p>
+        </div>
+        <div class="paid" *ngIf="isUnknown()">
+          <p>Unexpected error with this order.</p>
+          <p>If this message persist, contact administrators.</p>
+        </div>
+      </div>
+      <div *ngIf="!operationPrice">
+        <h3>Loading prices</h3>
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer">
+    <img style="height: 50px" src="../../assets/electrum_logo.png"/>
+    <div>Powered by Electrum
+    </div>
+  </div>
+</footer>
