@@ -7,48 +7,7 @@
     <property name="now" value="now()" dbms="h2"/>
     <property name="now" value="current_timestamp" dbms="postgresql"/>
 
-    <changeSet id="000000_initial_database.xml" author="admin">
-
-        <createSequence sequenceName="hibernate_sequence"/>
-
-        <createTable tableName="t_product">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="text">
-                <constraints nullable="false"/>
-            </column>
-            <column name="price" type="decimal">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <createTable tableName="t_order">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="product_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="btc_rate" type="decimal">
-                <constraints nullable="false"/>
-            </column>
-            <column name="btc_price" type="decimal">
-                <constraints nullable="false"/>
-            </column>
-            <column name="address" type="text">
-                <constraints nullable="true"/>
-            </column>
-            <column name="memo" type="text">
-                <constraints nullable="true"/>
-            </column>
-            <column name="time" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-            <column name="electrum_id" type="text">
-                <constraints nullable="true"/>
-            </column>
-        </createTable>
+    <changeSet id="000001_default_product.xml" author="pshenmic">
 
         <insert tableName="t_product">
             <column name="id">1</column>

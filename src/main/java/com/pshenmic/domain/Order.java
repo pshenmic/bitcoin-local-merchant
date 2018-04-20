@@ -1,7 +1,8 @@
 package com.pshenmic.domain;
 
+import com.pshenmic.enums.OrderStatus;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -16,26 +17,19 @@ public class Order {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    //btc price on the market. for example, 2000$
-    @Column(nullable = false, name = "btc_rate")
-    private BigDecimal btcRate;
-
-    //Final amount in btc
-    @Column(nullable = false, name = "btc_price")
-    private BigDecimal btcPrice;
-
     @Column(nullable = false, name = "address")
     private String address;
-
-    @Column(nullable = false, name = "memo")
-    private String memo;
 
     @Column(nullable = false, name = "time")
     private Instant time;
 
-    @Column(nullable = false, name = "electrum_id")
-    private String electrumId;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "operation_price_id")
+    private OperationPrice operationPrice;
 
+    @Column(nullable = false, name = "time")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     public Long getId() {
         return id;
@@ -53,36 +47,12 @@ public class Order {
         this.product = product;
     }
 
-    public BigDecimal getBtcRate() {
-        return btcRate;
-    }
-
-    public void setBtcRate(BigDecimal btcRate) {
-        this.btcRate = btcRate;
-    }
-
-    public BigDecimal getBtcPrice() {
-        return btcPrice;
-    }
-
-    public void setBtcPrice(BigDecimal btcPrice) {
-        this.btcPrice = btcPrice;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
     }
 
     public Instant getTime() {
@@ -93,11 +63,20 @@ public class Order {
         this.time = time;
     }
 
-    public String getElectrumId() {
-        return electrumId;
+    public OperationPrice getOperationPrice() {
+        return operationPrice;
     }
 
-    public void setElectrumId(String electrumId) {
-        this.electrumId = electrumId;
+    public void setOperationPrice(OperationPrice operationPrice) {
+        this.operationPrice = operationPrice;
     }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
 }

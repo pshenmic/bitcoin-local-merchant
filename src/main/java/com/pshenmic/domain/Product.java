@@ -1,6 +1,8 @@
 package com.pshenmic.domain;
 
 
+import com.pshenmic.enums.Currency;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -17,6 +19,9 @@ public class Product {
 
     @Column(nullable = false, name = "price")
     private BigDecimal price;
+
+    @Column(nullable = false, name = "currency")
+    private Currency currency;
 
     public Long getId() {
         return id;
@@ -41,4 +46,13 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
 }
