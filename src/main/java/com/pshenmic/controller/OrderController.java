@@ -38,21 +38,10 @@ public class OrderController implements OrderAPI {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        assertNotNull(order.getProduct());
-        assertNotNull(order.getProduct().getPrice());
-        assertNotNull(order.getBtcPrice());
-        assertNotNull(order.getBtcRate());
-
-
         OrderDTO orderDTO = mappingService.toDTO(order);
 
         SendRequest sendRequest = electrumService.getRequest(order.getAddress());
 
-        //todo move out to mapper
-        orderDTO.setPrice(order.getProduct().getPrice());
-        orderDTO.setBtcRate(order.getBtcRate());
-        orderDTO.setBtcAmount(sendRequest.getBtcAmount());
-        orderDTO.setStatus(sendRequest.getStatus());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

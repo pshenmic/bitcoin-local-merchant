@@ -1,9 +1,9 @@
 package com.pshenmic.service;
 
 
+import com.pshenmic.domain.OperationPrice;
 import com.pshenmic.exception.OperationPriceExtractingException;
 import com.pshenmic.model.BlockchainInfoTicker;
-import com.pshenmic.model.OperationPrice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -18,33 +18,21 @@ public class PricesService {
 
     private final Logger log = LoggerFactory.getLogger(PricesService.class);
 
-    public OperationPrice getPrice(BigDecimal price) throws OperationPriceExtractingException {
+    private final static String BLOCKCHAIN_INFO_API_URL = "https://blockchain.info/ticker";
 
-        try {
-
-            String url = "https://blockchain.info/ticker";
-
-            RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<BlockchainInfoTicker> responseEntity =
-                    restTemplate.getForEntity(url, BlockchainInfoTicker.class);
-            BlockchainInfoTicker tick = responseEntity.getBody();
-
-            if (tick.getRUB() == null) {
-                return null;
-            }
-            BigDecimal lastBtcRate = tick.getRUB().getFifteenMinutesPrice();
-            BigDecimal finalBtcAmount = price.divide(lastBtcRate, 7, RoundingMode.HALF_EVEN);
-
-            OperationPrice operationPrice = new OperationPrice();
-            operationPrice.setPrice(price);
-            operationPrice.setBtcRate(lastBtcRate);
-            operationPrice.setBtcPrice(finalBtcAmount);
-            return operationPrice;
-        } catch (Exception e) {
-            log.error("Error during prices grabbing", e);
-            throw new OperationPriceExtractingException(e.getCause());
+    public BigDecimal getBtcUsdPrice() throws OperationPriceExtractingException {
+        BlockchainInfoTicker blockchainInfoTicker = getTicks();
+        if (blockchainInfoTicker == null || blockchainInfoTicker.getUSD() == null || blockchainInfoTicker.getUSD().getFifteenMinutesPrice() == null) {
+            throw new OperationPriceExtractingException("JSON is not valid, some of required fields is null");
         }
+        return blockchainInfoTicker.getUSD().getFifteenMinutesPrice();
+    }
 
+    private BlockchainInfoTicker getTicks() {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<BlockchainInfoTicker> responseEntity =
+                restTemplate.getForEntity(BLOCKCHAIN_INFO_API_URL, BlockchainInfoTicker.class);
+        return responseEntity.getBody();
     }
 
 }

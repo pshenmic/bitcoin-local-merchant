@@ -7,6 +7,7 @@ import com.pshenmic.model.OperationPrice;
 import com.pshenmic.model.dto.OrderDTO;
 import com.pshenmic.model.dto.ProductDTO;
 import com.pshenmic.service.MappingService;
+import com.pshenmic.service.OrderService;
 import com.pshenmic.service.PricesService;
 import com.pshenmic.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ProductController implements ProductAPI {
 
     @Autowired
     private PricesService pricesService;
+
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
@@ -72,7 +76,7 @@ public class ProductController implements ProductAPI {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        //todo
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
