@@ -13,7 +13,7 @@ ENV ELECTRUM_HOSTNAME hostname
 ENV ELECTRUM_RPCUSER rpcuser
 ENV ELECTRUM_RPCPASSWORD rpcpassword
 CMD git -C $PROJECT_DIR pull && \
-mvn clean install -f $PROJECT_DIR/pom.xml && \
+mvn -Pprod clean install -f $PROJECT_DIR/pom.xml && \
 java \
 -Dspring.datasource.url=jdbc:postgresql://$POSTGRES_HOSTNAME:$POSTGRES_PORT/$POSTGRES_DB \
 -Dspring.datasource.username=$POSTGRES_USER \
