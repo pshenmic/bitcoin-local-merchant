@@ -27,7 +27,7 @@ public class Order {
     @JoinColumn(name = "operation_price_id")
     private OperationPrice operationPrice;
 
-    @Column(nullable = false, name = "time")
+    @Column(nullable = false, name = "status")
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 

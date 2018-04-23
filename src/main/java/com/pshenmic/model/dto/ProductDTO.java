@@ -1,5 +1,7 @@
 package com.pshenmic.model.dto;
 
+import com.pshenmic.enums.Currency;
+
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -15,6 +17,7 @@ public class ProductDTO {
     @NotNull
     private BigDecimal price;
 
+    private Currency currency;
 
     public Long getId() {
         return id;
@@ -46,5 +49,13 @@ public class ProductDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

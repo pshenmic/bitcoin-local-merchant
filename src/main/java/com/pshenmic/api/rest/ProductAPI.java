@@ -2,7 +2,7 @@ package com.pshenmic.api.rest;
 
 
 import com.pshenmic.exception.OperationPriceExtractingException;
-import com.pshenmic.model.OperationPrice;
+import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
 import com.pshenmic.model.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +54,7 @@ public interface ProductAPI {
      * @return {OperationPrice}
      */
     @RequestMapping(value = "/product/{id}/price", method = RequestMethod.GET)
-    ResponseEntity<OperationPrice> getOperationPriceByProductId(@PathVariable Long id) throws OperationPriceExtractingException;
+    ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(@PathVariable Long id) throws OperationPriceExtractingException;
 
     /**
      * Allowed roles : [ROLE_ANONYMOUS, ROLE_USER, ROLE_ADMIN]

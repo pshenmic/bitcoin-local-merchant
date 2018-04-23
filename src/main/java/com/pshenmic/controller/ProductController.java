@@ -3,7 +3,7 @@ package com.pshenmic.controller;
 import com.pshenmic.api.rest.ProductAPI;
 import com.pshenmic.domain.Product;
 import com.pshenmic.exception.OperationPriceExtractingException;
-import com.pshenmic.model.OperationPrice;
+import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
 import com.pshenmic.model.dto.ProductDTO;
 import com.pshenmic.service.MappingService;
@@ -55,16 +55,17 @@ public class ProductController implements ProductAPI {
     }
 
     @Override
-    public ResponseEntity<OperationPrice> getOperationPriceByProductId(Long id) throws OperationPriceExtractingException {
+    public ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(Long id) throws OperationPriceExtractingException {
         Product product = productService.getProductById(id);
 
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        OperationPrice operationPrice = pricesService.getPrice(product.getPrice());
 
-        return new ResponseEntity<>(operationPrice, HttpStatus.OK);
+        //todo impl
+
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

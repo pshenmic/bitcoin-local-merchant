@@ -14,7 +14,8 @@ public interface ProductMapper {
             @Mapping(source = "id", target = "id"),
             @Mapping(source = "name", target = "name"),
             @Mapping(source = "price", target = "price"),
-            @Mapping(target = "qrCodeBase64", expression = "java(qRCodeService.generateCodeFromProductId(product.getId()))")
+            @Mapping(target = "qrCodeBase64", expression = "java(qRCodeService.generateCodeFromProductId(product.getId()))"),
+            @Mapping(source = "currency", target = "currency")
     })
     ProductDTO toDTO(Product product);
 }

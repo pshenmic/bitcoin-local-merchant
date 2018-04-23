@@ -13,8 +13,8 @@
             <column name="id">1</column>
             <column name="name">Apple</column>
             <column name="price">50</column>
+            <column name="currency">USD</column>
         </insert>
-
     </changeSet>
 
 </databaseChangeLog>

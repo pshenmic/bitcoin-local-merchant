@@ -1,27 +1,25 @@
 package com.pshenmic.model.dto;
 
+import com.pshenmic.enums.OrderStatus;
+
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.Instant;
 
 public class OrderDTO {
 
     @NotNull
     private Long id;
 
-    @NotNull
-    private BigDecimal price;
+    private ProductDTO product;
 
-    @NotNull
-    private BigDecimal btcAmount;
-
-    @NotNull
-    private BigDecimal btcRate;
-
-    @NotNull
-    private String status;
-
-    @NotNull
     private String address;
+
+    private Instant time;
+
+    private OperationPriceDTO operationPrice;
+
+    private OrderStatus status;
 
     public Long getId() {
         return id;
@@ -31,36 +29,12 @@ public class OrderDTO {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public ProductDTO getProduct() {
+        return product;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getBtcAmount() {
-        return btcAmount;
-    }
-
-    public void setBtcAmount(BigDecimal btcAmount) {
-        this.btcAmount = btcAmount;
-    }
-
-    public BigDecimal getBtcRate() {
-        return btcRate;
-    }
-
-    public void setBtcRate(BigDecimal btcRate) {
-        this.btcRate = btcRate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 
     public String getAddress() {
@@ -69,5 +43,29 @@ public class OrderDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Instant getTime() {
+        return time;
+    }
+
+    public void setTime(Instant time) {
+        this.time = time;
+    }
+
+    public OperationPriceDTO getOperationPrice() {
+        return operationPrice;
+    }
+
+    public void setOperationPrice(OperationPriceDTO operationPrice) {
+        this.operationPrice = operationPrice;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 }

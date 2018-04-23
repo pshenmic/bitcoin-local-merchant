@@ -31,10 +31,6 @@ public class ElectrumService {
 
     private RestTemplate restTemplate;
 
-    private final static String electrumUsername = "user";
-    //private final static String electrumPassword = "mOGETJiR7kH5_gyGHhWZzg==";
-    private final static String electrumPassword = "XfIR9n8HQ11Igrzi14Vh6A==";
-
     @Autowired
     private ElectrumAPIService electrumAPIService;
 
@@ -85,22 +81,7 @@ public class ElectrumService {
             request.setParams(sendRequestParams);
 
 
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.add("Authorization", "Basic " + Base64.getEncoder().encodeToString((electrumUsername + ":" + electrumPassword).getBytes()));
-
-            HttpEntity<ElectrumSendRequest> httpEntity = new HttpEntity<>(request, httpHeaders);
-
             SendRequest sendRequest = electrumAPIService.test(sendRequestParams);
-
-
-/*
-            ResponseEntity<ElectrumSendRequestResponse> response =
-                    restTemplate.exchange(electrumUrl, HttpMethod.POST, httpEntity, ElectrumSendRequestResponse.class);
-
-            ElectrumSendRequestResponse responseBody = response.getBody();
-            if(responseBody.getError() != null) {
-                throw new Exception(responseBody.getError().getMessage());
-            }*/
 
             return sendRequest;
         } catch (Exception e) {
@@ -110,7 +91,7 @@ public class ElectrumService {
 
     }
 
-    public SendRequest getRequest(String address) {
+ /*   public SendRequest getRequest(String address) {
         try {
 
             GetRequestParams getRequestParams = new GetRequestParams();
@@ -136,6 +117,6 @@ public class ElectrumService {
         }
 
     }
-
+*/
 
 }

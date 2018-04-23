@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 
 @Service
 public class OrderService {
@@ -25,6 +24,9 @@ public class OrderService {
 
     @Autowired
     private ElectrumService electrumService;
+
+    @Autowired
+    private MappingService mappingService;
 
     public Order getProductById(Long id) {
         return orderRepository.getOne(id);
@@ -43,18 +45,17 @@ public class OrderService {
                 break;
             default:
                 throw new UnknownCurrencyException();
-
         }
 
         Order order = new Order();
         order.setProduct(product);
+        order.setOperationPrice(operationPrice);
 
         SendRequest result = electrumService.sendRequest(operationPrice.getBtcPrice(), "order: " + order.getId());
 
         order.setAddress(result.getAddress());
-        order.setMemo(result.getMemo());
         order.setTime(result.getTime());
-        order.setElectrumId(result.getId());
+        order.setStatus(mappingService.toOrderStatus(result.getStatus()));
 
         return orderRepository.save(order);
     }
@@ -71,3 +72,5 @@ public class OrderService {
 
 
 }
+
+
