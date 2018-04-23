@@ -1,0 +1,39 @@
+version: '3'
+services:
+  blm:
+    container_name: blm
+    image: pshenmic/bitcoin-local-merchant
+    expose:
+      - 8080
+    ports:
+      - "127.0.0.1:8080:8081"
+    environment:
+      - POSTGRES_HOSTNAME=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=bitcoinlocalmerchant
+      - POSTGRES_PASSWORD=bitcoinlocalmerchant
+      - POSTGRES_DB=bitcoinlocalmerchant
+      - BLM_HOSTNAME=hostname
+      - ELECTRUM_HOSTNAME=electrum
+      - ELECTRUM_RPCUSER=rpcuser
+      - ELECTRUM_RPCPASSWORD=rpcpassword
+  database:
+    image: postgres
+    container_name: blm_postgres
+    environment:
+      POSTGRES_USER: bitcoinlocalmerchant
+      POSTGRES_PASSWORD: bitcoinlocalmerchant
+      POSTGRES_DB: bitcoinlocalmerchant
+    volumes:
+       - ./data/postgres:/var/lib/postgresql/data
+    expose:
+      - 5432
+  electrum:
+     container_name: electrum
+     image: pshenmic/electrum
+     volumes:
+       - '../data/electrum:/root/.electrum'
+     environment:
+       - TESTNET=1
+       - RPC_USER=user
+       - RPC_PASSWORD=password
