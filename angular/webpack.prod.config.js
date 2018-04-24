@@ -87,7 +87,7 @@ module.exports = {
     ]
   },
   "output": {
-    "path": path.join(process.cwd(), "..", "src", "main", "resources", "static"),
+    "path": path.join(process.cwd(), "../", "src", "main", "resources", "static"),
     "filename": "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
