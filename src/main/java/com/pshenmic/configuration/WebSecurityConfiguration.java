@@ -25,7 +25,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/com/pshenmic/api/admin/**").authenticated()
+                .antMatchers("/api/admin/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
     }
