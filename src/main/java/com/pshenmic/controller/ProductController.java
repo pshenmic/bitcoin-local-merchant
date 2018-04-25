@@ -2,8 +2,11 @@ package com.pshenmic.controller;
 
 import com.pshenmic.api.rest.ProductAPI;
 import com.pshenmic.domain.OperationPrice;
+import com.pshenmic.domain.Order;
 import com.pshenmic.domain.Product;
+import com.pshenmic.exception.ElectrumRequestFailedException;
 import com.pshenmic.exception.OperationPriceExtractingException;
+import com.pshenmic.exception.OrderStatusMappingFailedException;
 import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
@@ -70,14 +73,15 @@ public class ProductController implements ProductAPI {
     }
 
     @Override
-    public ResponseEntity<OrderDTO> makeOrderByProductId(@PathVariable Long id) {
+    public ResponseEntity<OrderDTO> makeOrderByProductId(@PathVariable Long id) throws OperationPriceExtractingException, UnknownCurrencyException, ElectrumRequestFailedException, OrderStatusMappingFailedException {
         Product product = productService.getProductById(id);
 
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        Order order = orderService.createOrderByProduct(product);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(mappingService.toDTO(order), HttpStatus.OK);
     }
 }

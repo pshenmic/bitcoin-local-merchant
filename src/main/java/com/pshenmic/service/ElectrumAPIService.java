@@ -15,7 +15,7 @@ public class ElectrumAPIService {
     @Autowired
     private ElectrumAPI electrumAPI;
 
-    public SendRequest test(SendRequestParams sendRequestParams) {
+    public SendRequest addRequest(SendRequestParams sendRequestParams) {
         return electrumAPI.addrequest(sendRequestParams.getAmount(), sendRequestParams.getMemo(), sendRequestParams.getForce(), sendRequestParams.getExpiration());
     }
 

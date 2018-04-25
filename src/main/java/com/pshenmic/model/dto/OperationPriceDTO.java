@@ -8,8 +8,6 @@ public class OperationPriceDTO {
 
     private Long id;
 
-    private BigDecimal btcRate;
-
     private BigDecimal btcPrice;
 
     private BigDecimal fiatRate;
@@ -23,14 +21,6 @@ public class OperationPriceDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigDecimal getBtcRate() {
-        return btcRate;
-    }
-
-    public void setBtcRate(BigDecimal btcRate) {
-        this.btcRate = btcRate;
     }
 
     public BigDecimal getBtcPrice() {

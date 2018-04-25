@@ -12,7 +12,6 @@ public interface OperationPriceMapper {
 
     @Mappings({
             @Mapping(source = "id", target = "id"),
-            @Mapping(source = "btcRate", target = "btcRate"),
             @Mapping(source = "btcPrice", target = "btcPrice"),
             @Mapping(source = "fiatRate", target = "fiatRate"),
             @Mapping(source = "currency", target = "currency")

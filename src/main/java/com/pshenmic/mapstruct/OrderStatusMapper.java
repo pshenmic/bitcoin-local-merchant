@@ -9,7 +9,7 @@ public interface OrderStatusMapper {
 
     default OrderStatus fromStringToOrderStatus(String status) {
         try {
-            return OrderStatus.valueOf(status);
+            return OrderStatus.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
             return null;
         }

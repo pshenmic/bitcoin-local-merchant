@@ -13,7 +13,7 @@ public class Order {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -23,7 +23,7 @@ public class Order {
     @Column(nullable = false, name = "time")
     private Instant time;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "operation_price_id")
     private OperationPrice operationPrice;
 

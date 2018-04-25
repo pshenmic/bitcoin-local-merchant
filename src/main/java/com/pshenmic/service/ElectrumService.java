@@ -1,6 +1,7 @@
 package com.pshenmic.service;
 
 
+import com.pshenmic.exception.ElectrumRequestFailedException;
 import com.pshenmic.model.*;
 import com.pshenmic.model.electrum.GetBalanceResult;
 import com.pshenmic.model.electrum.GetRequestParams;
@@ -66,13 +67,13 @@ public class ElectrumService {
     }
 
 
-    public SendRequest sendRequest(BigDecimal amount, String memo) {
+    public SendRequest sendRequest(BigDecimal amount) throws ElectrumRequestFailedException {
         try {
 
             ElectrumSendRequest request = new ElectrumSendRequest();
             SendRequestParams sendRequestParams = new SendRequestParams();
             sendRequestParams.setAmount(amount);
-            sendRequestParams.setMemo(memo);
+            sendRequestParams.setMemo(null);
             sendRequestParams.setForce(true);
             sendRequestParams.setExpiration(paymentTimeout);
 
@@ -81,12 +82,12 @@ public class ElectrumService {
             request.setParams(sendRequestParams);
 
 
-            SendRequest sendRequest = electrumAPIService.test(sendRequestParams);
+            SendRequest sendRequest = electrumAPIService.addRequest(sendRequestParams);
 
             return sendRequest;
         } catch (Exception e) {
             log.error("Failed to make electrum request", e);
-            return null;
+            throw new ElectrumRequestFailedException(e);
         }
 
     }

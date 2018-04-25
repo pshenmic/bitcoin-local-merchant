@@ -75,7 +75,7 @@ export class ProductComponent implements OnInit {
         this.order = order;
         //Magic line to override first status Unknown
         this.order.status = "Pending";
-        Observable.interval(5000)
+        /*Observable.interval(5000)
           .subscribe(() => {
             this.restAPIService.getOrderStatus(order.id).subscribe(
               order => {
@@ -83,7 +83,7 @@ export class ProductComponent implements OnInit {
               },
               error => this.error = <any> error
             )
-          });
+          });*/
       },
       error => this.error = <any> error
     );

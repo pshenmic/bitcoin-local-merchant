@@ -23,7 +23,7 @@ import java.util.Base64;
 public class QRCodeService {
 
 
-    @Value(value = "blm.hostname")
+    @Value("${blm.hostname}")
     private String hostname;
 
 

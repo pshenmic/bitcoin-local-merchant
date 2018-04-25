@@ -4,7 +4,9 @@ import com.pshenmic.domain.OperationPrice;
 import com.pshenmic.domain.Order;
 import com.pshenmic.domain.Product;
 import com.pshenmic.enums.Currency;
+import com.pshenmic.exception.ElectrumRequestFailedException;
 import com.pshenmic.exception.OperationPriceExtractingException;
+import com.pshenmic.exception.OrderStatusMappingFailedException;
 import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.electrum.SendRequest;
 import com.pshenmic.repository.OrderRepository;
@@ -34,7 +36,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order createOrderByProduct(Product product, SendRequest sendRequest) throws OperationPriceExtractingException, UnknownCurrencyException {
+    public Order createOrderByProduct(Product product) throws OperationPriceExtractingException, UnknownCurrencyException, ElectrumRequestFailedException, OrderStatusMappingFailedException {
         Currency currency = product.getCurrency();
 
         OperationPrice operationPrice = new OperationPrice();
@@ -48,17 +50,21 @@ public class OrderService {
                 throw new UnknownCurrencyException();
         }
 
-        operationPrice.setBtcRate(product.getPrice().divide(operationPrice.getFiatRate(), MathContext.DECIMAL32));
+        operationPrice.setBtcPrice(product.getPrice().divide(operationPrice.getFiatRate(), MathContext.DECIMAL32));
 
         Order order = new Order();
         order.setProduct(product);
         order.setOperationPrice(operationPrice);
 
-        SendRequest result = electrumService.sendRequest(operationPrice.getBtcPrice(), "order: " + order.getId());
+
+        SendRequest result = electrumService.sendRequest(operationPrice.getBtcPrice());
 
         order.setAddress(result.getAddress());
         order.setTime(result.getTime());
         order.setStatus(mappingService.toOrderStatus(result.getStatus()));
+        if(order.getStatus() == null) {
+            throw new OrderStatusMappingFailedException();
+        }
 
         return orderRepository.save(order);
     }

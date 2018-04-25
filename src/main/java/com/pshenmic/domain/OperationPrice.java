@@ -14,9 +14,6 @@ public class OperationPrice {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, name = "btc_rate")
-    private BigDecimal btcRate;
-
     @Column(nullable = false, name = "btc_price")
     private BigDecimal btcPrice;
 
@@ -33,14 +30,6 @@ public class OperationPrice {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigDecimal getBtcRate() {
-        return btcRate;
-    }
-
-    public void setBtcRate(BigDecimal btcRate) {
-        this.btcRate = btcRate;
     }
 
     public BigDecimal getBtcPrice() {

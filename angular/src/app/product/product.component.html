@@ -42,25 +42,25 @@
 
         <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown()">
           <div style="padding: 10px">
-            <span>Price of {{product.name}}:</span>
+            <span>Price of {{order.product.name}}:</span>
             <p style="margin: 5px">
-              <span style="font-size: 2em">{{order.price}} (RUB)</span>
+              <span style="font-size: 2em">{{order.product.price}} (RUB)</span>
             </p>
             <div class="order_info">
               <div class="order_line">
                 <span>BTC rate:</span>
-                <span>{{order.btcRate}} (RUB)</span>
+                <span>{{order.operationPrice.fiatRate}} (RUB)</span>
               </div>
               <div class="order_line">
                 <span>Final BTC amount:</span>
-                <span>{{order.btcAmount}}</span>
+                <span>{{order.operationPrice.btcPrice}}</span>
               </div>
               <div class="order_line address">
                 <span>{{order.address}}</span>
               </div>
             </div><!--
             <p>ID: {{order.id}}</p>
-            <p>BTC rate: {{order.btcRate}} (RUB)</p>
+            <p>BTC rate: {{order.fiatRate}} (RUB)</p>
             <p>Final BTC to pay: {{order.btcAmount}}</p>
             <p>Address: {{order.address}}</p>
             <p>Status: {{order.status}}</p>-->

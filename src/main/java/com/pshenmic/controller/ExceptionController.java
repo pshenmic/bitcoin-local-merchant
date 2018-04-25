@@ -1,8 +1,6 @@
 package com.pshenmic.controller;
 
-import com.pshenmic.exception.OperationPriceExtractingException;
-import com.pshenmic.exception.QRCodeGenerationException;
-import com.pshenmic.exception.UnknownCurrencyException;
+import com.pshenmic.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +19,18 @@ public class ExceptionController {
             reason = "Unknown currency exception")
     @ExceptionHandler(UnknownCurrencyException.class)
     public void unknownCurrencyException() {
+    }
+
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE,
+            reason = "Unknown currency exception")
+    @ExceptionHandler(ElectrumRequestFailedException.class)
+    public void electrumRequestFailedException() {
+    }
+
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE,
+            reason = "Unknown currency exception")
+    @ExceptionHandler(OrderStatusMappingFailedException.class)
+    public void orderStatusMappingFailedException() {
     }
 
 }

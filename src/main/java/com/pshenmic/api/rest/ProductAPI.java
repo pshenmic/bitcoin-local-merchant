@@ -1,7 +1,9 @@
 package com.pshenmic.api.rest;
 
 
+import com.pshenmic.exception.ElectrumRequestFailedException;
 import com.pshenmic.exception.OperationPriceExtractingException;
+import com.pshenmic.exception.OrderStatusMappingFailedException;
 import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
@@ -67,7 +69,7 @@ public interface ProductAPI {
      * @return {AuthCheckDTO}
      */
     @RequestMapping(value = "/product/{id}/order", method = RequestMethod.GET)
-    ResponseEntity<OrderDTO> makeOrderByProductId(@PathVariable Long id);
+    ResponseEntity<OrderDTO> makeOrderByProductId(@PathVariable Long id) throws OperationPriceExtractingException, UnknownCurrencyException, ElectrumRequestFailedException, OrderStatusMappingFailedException;
 
 
 }
