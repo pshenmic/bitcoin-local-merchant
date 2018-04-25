@@ -74,16 +74,16 @@ export class ProductComponent implements OnInit {
       order => {
         this.order = order;
         //Magic line to override first status Unknown
-        this.order.status = "Pending";
-        /*Observable.interval(5000)
+        this.order.status = "PENDING";
+        Observable.interval(5000)
           .subscribe(() => {
-            this.restAPIService.getOrderStatus(order.id).subscribe(
+            this.restAPIService.getOrder(order.id).subscribe(
               order => {
                 this.order = order;
               },
               error => this.error = <any> error
             )
-          });*/
+          });
       },
       error => this.error = <any> error
     );
@@ -91,28 +91,28 @@ export class ProductComponent implements OnInit {
 
   public isPaid(): boolean {
     if (this.order != null && this.order.status != null) {
-      return this.order.status === "Paid";
+      return this.order.status === "PAID";
     }
     return false;
   }
 
   public isExpired(): boolean {
     if (this.order != null && this.order.status != null) {
-      return this.order.status === "Expired";
+      return this.order.status === "EXPIRED";
     }
     return false;
   }
 
   public isPending(): boolean {
     if (this.order != null && this.order.status != null) {
-      return this.order.status === "Pending";
+      return this.order.status === "PENDING";
     }
     return false;
   }
 
   public isUnknown(): boolean {
     if (this.order != null && this.order.status != null) {
-      return this.order.status === "Unknown";
+      return this.order.status === "UNKNOWN";
     }
     return false;
   }

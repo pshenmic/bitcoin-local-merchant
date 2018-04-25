@@ -21,7 +21,7 @@ public interface OrderAPI {
      * @param id {Long}
      * @return {OrderDTO}
      */
-    @RequestMapping(value = "/order/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     ResponseEntity<OrderDTO> getProduct(@PathVariable Long id);
 
 }

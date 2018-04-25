@@ -65,8 +65,8 @@ export class RestAPIService {
       .catch(this.handleError);
   }
 
-  getOrderStatus(id: number): Observable<Order> {
-    return this.http.get('/api/order/get/' + id)
+  getOrder(id: number): Observable<Order> {
+    return this.http.get('/api/order/' + id)
       .map(this.extractData)
       .catch(this.handleError);
   }
