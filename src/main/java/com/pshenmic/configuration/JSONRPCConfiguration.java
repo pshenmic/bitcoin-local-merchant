@@ -3,6 +3,8 @@ package com.pshenmic.configuration;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 import com.googlecode.jsonrpc4j.ProxyUtil;
 import com.pshenmic.api.service.ElectrumAPI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +27,8 @@ public class JSONRPCConfiguration {
     @Value("${blm.electrum.rpcpassword}")
     private String rpcPassword;
 
+    private final Logger log = LoggerFactory.getLogger(JSONRPCConfiguration.class);
+
     @Bean
     public JsonRpcHttpClient jsonRpcHttpClient() {
         URL url = null;
@@ -37,7 +41,7 @@ public class JSONRPCConfiguration {
             JsonRpcHttpClient jsonRpcHttpClient = new JsonRpcHttpClient(url, map);
             return jsonRpcHttpClient;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error("Error while initializing JsonRpcHttpClient bean", e);
             throw new FatalBeanException("Could not construct jsonRpcHttpClient");
         }
     }
