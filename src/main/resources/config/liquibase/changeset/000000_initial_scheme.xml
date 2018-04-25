@@ -50,9 +50,6 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="btc_rate" type="decimal">
-                <constraints nullable="false"/>
-            </column>
             <column name="btc_price" type="decimal">
                 <constraints nullable="false"/>
             </column>
