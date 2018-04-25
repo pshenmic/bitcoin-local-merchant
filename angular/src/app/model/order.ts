@@ -1,3 +1,6 @@
+import {Product} from './product';
+import {OperationPrice} from './operation-price';
+
 export class Order {
 
   public id: number;
