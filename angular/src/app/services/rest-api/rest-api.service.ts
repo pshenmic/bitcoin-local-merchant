@@ -42,19 +42,19 @@ export class RestAPIService {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get('/api/product/get')
+    return this.http.get('/api/product/getAll')
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get('/api/product/get/' + id)
+    return this.http.get('/api/product/' + id)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getPrice(id: number): Observable<OperationPrice> {
-    return this.http.get('/api/product/get/' + id + '/price')
+    return this.http.get('/api/product/' + id + '/price')
       .map(this.extractData)
       .catch(this.handleError);
   }

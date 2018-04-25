@@ -21,6 +21,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(nullable = false, name = "currency")
+    @Enumerated(EnumType.STRING)
     private Currency currency;
 
     public Long getId() {
@@ -54,5 +55,4 @@ public class Product {
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
-
 }

@@ -5,15 +5,15 @@
   <div class="content" *ngIf="product && !pathError">
     <div class="item">
       <div class="prices_box" *ngIf="operationPrice && !ordered">
-        <p>{{product.name}} ({{product.price}} RUB)</p>
+        <p>{{product.name}} ({{product.price}} {{product.currency}})</p>
 
         <div class="prices_line">
           <span>Price of {{product.name}}: </span>
-          <span>{{product.price}} (RUB)</span>
+          <span>{{product.price}} ({{product.currency}})</span>
         </div>
         <div class="prices_line">
           <span>BTC Rate: </span>
-          <span>{{operationPrice.btcRate}} (RUB)</span>
+          <span>{{operationPrice.fiatRate| number:'3.2-2'}} ({{operationPrice.currency}})</span>
         </div>
         <div class="prices_line">
           <span>Final BTC amount:</span>

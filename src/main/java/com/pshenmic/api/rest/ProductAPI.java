@@ -2,6 +2,7 @@ package com.pshenmic.api.rest;
 
 
 import com.pshenmic.exception.OperationPriceExtractingException;
+import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
 import com.pshenmic.model.dto.ProductDTO;
@@ -54,7 +55,7 @@ public interface ProductAPI {
      * @return {OperationPrice}
      */
     @RequestMapping(value = "/product/{id}/price", method = RequestMethod.GET)
-    ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(@PathVariable Long id) throws OperationPriceExtractingException;
+    ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(@PathVariable Long id) throws OperationPriceExtractingException, UnknownCurrencyException;
 
     /**
      * Allowed roles : [ROLE_ANONYMOUS, ROLE_USER, ROLE_ADMIN]

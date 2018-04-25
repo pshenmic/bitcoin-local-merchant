@@ -5,9 +5,12 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.pshenmic.exception.QRCodeGenerationException;
+import net.glxn.qrgen.javase.QRCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -58,9 +61,9 @@ public class QRCodeService {
      *
      * @param productId {Long}
      * @return {String}
-     */
+     * */
 
-    public String generateCodeFromProductId(Long productId) {
+    public String generateCodeFromProductId(Long productId)  {
         return generateCode(hostname + "/product/" + productId);
     }
 

@@ -19,6 +19,7 @@ public class ProductDTO {
 
     private Currency currency;
 
+
     public Long getId() {
         return id;
     }

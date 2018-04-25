@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.MathContext;
 
 @Service
 public class OrderService {
@@ -46,6 +47,8 @@ public class OrderService {
             default:
                 throw new UnknownCurrencyException();
         }
+
+        operationPrice.setBtcRate(product.getPrice().divide(operationPrice.getFiatRate(), MathContext.DECIMAL32));
 
         Order order = new Order();
         order.setProduct(product);

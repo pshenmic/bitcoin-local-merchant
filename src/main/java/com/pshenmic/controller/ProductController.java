@@ -1,18 +1,18 @@
 package com.pshenmic.controller;
 
 import com.pshenmic.api.rest.ProductAPI;
+import com.pshenmic.domain.OperationPrice;
 import com.pshenmic.domain.Product;
 import com.pshenmic.exception.OperationPriceExtractingException;
+import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.dto.OperationPriceDTO;
 import com.pshenmic.model.dto.OrderDTO;
 import com.pshenmic.model.dto.ProductDTO;
-import com.pshenmic.service.MappingService;
-import com.pshenmic.service.OrderService;
-import com.pshenmic.service.PricesService;
-import com.pshenmic.service.ProductService;
+import com.pshenmic.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +30,7 @@ public class ProductController implements ProductAPI {
     private MappingService mappingService;
 
     @Autowired
-    private PricesService pricesService;
+    private OperationPriceService operationPriceService;
 
     @Autowired
     private OrderService orderService;
@@ -43,7 +43,7 @@ public class ProductController implements ProductAPI {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> getProductById(Long id) {
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);
 
         if (product == null) {
@@ -55,7 +55,7 @@ public class ProductController implements ProductAPI {
     }
 
     @Override
-    public ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(Long id) throws OperationPriceExtractingException {
+    public ResponseEntity<OperationPriceDTO> getOperationPriceByProductId(@PathVariable Long id) throws OperationPriceExtractingException, UnknownCurrencyException {
         Product product = productService.getProductById(id);
 
         if (product == null) {
@@ -63,14 +63,14 @@ public class ProductController implements ProductAPI {
         }
 
 
-        //todo impl
+        OperationPriceDTO operationPriceDTO = operationPriceService.getOperationPriceByProduct(product);
 
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(operationPriceDTO, HttpStatus.OK);
 
     }
 
     @Override
-    public ResponseEntity<OrderDTO> makeOrderByProductId(Long id) {
+    public ResponseEntity<OrderDTO> makeOrderByProductId(@PathVariable Long id) {
         Product product = productService.getProductById(id);
 
         if (product == null) {
