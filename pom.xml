@@ -93,6 +93,7 @@
     <properties>
         <java.version>1.8</java.version>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+        <base.href>/</base.href>
     </properties>
 
     <repositories>
@@ -182,6 +183,9 @@
                                 <phase>generate-resources</phase>
 
                                 <configuration>
+                                    <environmentVariables>
+                                        <BASE_HREF>${base.href}</BASE_HREF>
+                                    </environmentVariables>
                                     <workingDirectory>angular/</workingDirectory>
                                     <arguments>run build-prod</arguments>
                                 </configuration>
@@ -199,10 +203,6 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-                    </resource>
-                    <resource>
-                        <directory>static</directory>
-                        <targetPath>static</targetPath>
                     </resource>
                 </resources>
             </build>

@@ -397,7 +397,7 @@ module.exports = {
         }
     }
     }),
-    new BaseHrefWebpackPlugin({}),
+    new BaseHrefWebpackPlugin({baseHref: process.env.BASE_HREF || null}),
     new CommonsChunkPlugin({
       "minChunks": 2,
       "async": "common"
