@@ -154,7 +154,7 @@
                                     <goal>install-node-and-npm</goal>
                                 </goals>
                                 <!-- optional: default phase is "generate-resources" -->
-                                <phase>compile</phase>
+                                <phase>generate-resources</phase>
                                 <configuration>
                                     <workingDirectory>angular/</workingDirectory>
                                 </configuration>
@@ -165,7 +165,7 @@
                                     <goal>npm</goal>
                                 </goals>
 
-                                <phase>compile</phase>
+                                <phase>generate-resources</phase>
 
                                 <configuration>
                                     <workingDirectory>angular/</workingDirectory>
@@ -179,7 +179,7 @@
                                     <goal>npm</goal>
                                 </goals>
 
-                                <phase>compile</phase>
+                                <phase>generate-resources</phase>
 
                                 <configuration>
                                     <workingDirectory>angular/</workingDirectory>
