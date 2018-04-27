@@ -40,7 +40,7 @@
           </p>
         </div>
 
-        <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown()">
+        <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown() && !isError">
           <div style="padding: 10px">
             <span>Price of {{order.product.name}}:</span>
             <p style="margin: 5px">
@@ -84,6 +84,10 @@
         <div class="paid" *ngIf="isUnknown()">
           <p>Unexpected error with this order.</p>
           <p>If this message persist, contact administrators.</p>
+        </div>
+        <div class="paid" *ngIf="isError()">
+          <p>Unexpected error with this order.</p>
+          <p>Please, contact admins to solve this error. Order ID : {{order.id}}</p>
         </div>
       </div>
       <div *ngIf="!operationPrice">

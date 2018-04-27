@@ -49,6 +49,9 @@ public class SendRequest {
     @JsonProperty("exp")
     private int expiration;
 
+    @JsonProperty("confirmations")
+    private int confirmations;
+
     public String getStatus() {
         return status;
     }
@@ -151,5 +154,13 @@ public class SendRequest {
 
     public void setExpiration(int expiration) {
         this.expiration = expiration;
+    }
+
+    public int getConfirmations() {
+        return confirmations;
+    }
+
+    public void setConfirmations(int confirmations) {
+        this.confirmations = confirmations;
     }
 }

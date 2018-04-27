@@ -116,4 +116,11 @@ export class ProductComponent implements OnInit {
     }
     return false;
   }
+
+  public isError(): boolean {
+    if (this.order != null && this.order.status != null) {
+      return this.order.status === "ERROR";
+    }
+    return false;
+  }
 }

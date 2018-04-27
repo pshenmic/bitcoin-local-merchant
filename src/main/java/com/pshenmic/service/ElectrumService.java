@@ -2,23 +2,19 @@ package com.pshenmic.service;
 
 
 import com.pshenmic.exception.ElectrumRequestFailedException;
-import com.pshenmic.model.*;
-import com.pshenmic.model.electrum.GetBalanceResult;
-import com.pshenmic.model.electrum.GetRequestParams;
+import com.pshenmic.model.ElectrumSendRequest;
 import com.pshenmic.model.electrum.SendRequest;
 import com.pshenmic.model.electrum.SendRequestParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 
 @Service
 public class ElectrumService {
@@ -47,25 +43,6 @@ public class ElectrumService {
 
     }
 
-    public GetBalanceResult getBalance() {
-        try {
-
-            ElectrumGetBalanceRequest request = new ElectrumGetBalanceRequest();
-            request.setId("bitcoin-local-merchant");
-            request.setMethod("getbalance");
-            request.setParams(new ArrayList<>());
-
-            HttpEntity<ElectrumGetBalanceRequest> httpEntity = new HttpEntity<>(request);
-
-            ResponseEntity<ElectrumGetBalanceResponse> response =
-                    restTemplate.exchange(electrumUrl, HttpMethod.POST, httpEntity, ElectrumGetBalanceResponse.class);
-            ElectrumGetBalanceResponse responseBody = response.getBody();
-            return responseBody.getResult();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
 
     public SendRequest sendRequest(BigDecimal amount) throws ElectrumRequestFailedException {
         try {
@@ -92,32 +69,10 @@ public class ElectrumService {
 
     }
 
- /*   public SendRequest getRequest(String address) {
-        try {
 
-            GetRequestParams getRequestParams = new GetRequestParams();
-            getRequestParams.setKey(address);
-
-            ElectrumGetRequest electrumGetRequest = new ElectrumGetRequest();
-            electrumGetRequest.setParams(getRequestParams);
-
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.add("Authorization", "Basic " + Base64.getEncoder().encodeToString((electrumUsername + ":" + electrumPassword).getBytes()));
-
-            electrumGetRequest.setId("bitcoin-local-merchant");
-            electrumGetRequest.setMethod("getrequest");
-            electrumGetRequest.setParams(getRequestParams);
-
-            HttpEntity<ElectrumGetRequest> httpEntity = new HttpEntity<>(electrumGetRequest, httpHeaders);
-            ResponseEntity<ElectrumGetRequestResponse> response =
-                    restTemplate.exchange(electrumUrl, HttpMethod.POST, httpEntity, ElectrumGetRequestResponse.class);
-            ElectrumGetRequestResponse responseBody = response.getBody();
-            return responseBody.getResult();
-        } catch (Exception e) {
-            return null;
-        }
-
+    public SendRequest getRequest(String address) {
+        return electrumAPIService.getRequest(address);
     }
-*/
+
 
 }

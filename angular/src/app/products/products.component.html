@@ -2,7 +2,7 @@
   <div>
     <div class="products" *ngIf="products">
       <div class="product" *ngFor="let product of products">
-        <span>{{product.name}} : {{product.price}} (RUB)</span>
+        <span>{{product.name}} : {{product.price}} ({{product.currency}})</span>
         <p>
           <a href="product/{{product.id}}" class="link">
             <img [src]="'data:image/jpg;base64,' + product.qrCodeBase64"/>

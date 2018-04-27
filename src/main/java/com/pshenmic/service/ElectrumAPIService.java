@@ -16,7 +16,11 @@ public class ElectrumAPIService {
     private ElectrumAPI electrumAPI;
 
     public SendRequest addRequest(SendRequestParams sendRequestParams) {
-        return electrumAPI.addrequest(sendRequestParams.getAmount(), sendRequestParams.getMemo(), sendRequestParams.getForce(), sendRequestParams.getExpiration());
+        return electrumAPI.addRequest(sendRequestParams.getAmount(), sendRequestParams.getMemo(), sendRequestParams.getForce(), sendRequestParams.getExpiration());
+    }
+
+    public SendRequest getRequest(String address) {
+        return electrumAPI.getRequest(address);
     }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.MathContext;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -33,6 +34,10 @@ public class OrderService {
 
     public Order getProductById(Long id) {
         return orderRepository.getOne(id);
+    }
+
+    public List<Order> getAllPendingOrders() {
+        return orderRepository.findAllPendingOrders();
     }
 
     @Transactional
@@ -62,14 +67,16 @@ public class OrderService {
         order.setAddress(result.getAddress());
         order.setTime(result.getTime());
         order.setStatus(mappingService.toOrderStatus(result.getStatus()));
-        if(order.getStatus() == null) {
+        if (order.getStatus() == null) {
             throw new OrderStatusMappingFailedException();
         }
 
         return orderRepository.save(order);
     }
 
-    //todo edit method
+    public Order updateOrder(Order order) {
+        return orderRepository.save(order);
+    }
 
     public void deleteOrder(Long id) {
         orderRepository.delete(id);
