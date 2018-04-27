@@ -8,15 +8,18 @@ services:
     ports:
       - "127.0.0.1:8080:8081"
     environment:
+      - BASE_HREF=/
       - POSTGRES_HOSTNAME=database
       - POSTGRES_PORT=5432
       - POSTGRES_USER=bitcoinlocalmerchant
       - POSTGRES_PASSWORD=bitcoinlocalmerchant
       - POSTGRES_DB=bitcoinlocalmerchant
       - BLM_HOSTNAME=hostname
-      - ELECTRUM_HOSTNAME=electrum
+      - 'ELECTRUM_HOSTNAME=http://electrum:7777'
       - ELECTRUM_RPCUSER=rpcuser
       - ELECTRUM_RPCPASSWORD=rpcpassword
+    volumes:
+       - './data/m2:/root/.m2'
   database:
     image: postgres
     container_name: blm_postgres
