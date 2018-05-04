@@ -3,7 +3,7 @@ ARG BASE_HREF=/
 WORKDIR /opt
 RUN git clone https://github.com/pshenmic/bitcoin-local-merchant.git
 ENV PROJECT_DIR /opt/bitcoin-local-merchant
-RUN mvn clean install -Pprod -f $PROJECT_DIR/pom.xml
+RUN mvn -Dbase.href=${BASE_HREF} -Pprod clean install -f $PROJECT_DIR/pom.xml
 ENV POSTGRES_HOSTNAME hostname
 ENV POSTGRES_PORT 5432
 ENV POSTGRES_USER user
