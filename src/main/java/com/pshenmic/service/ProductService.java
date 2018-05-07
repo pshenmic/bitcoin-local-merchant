@@ -26,6 +26,7 @@ public class ProductService {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
+        product.setCurrency(productDTO.getCurrency());
         return productRepository.save(product);
     }
 

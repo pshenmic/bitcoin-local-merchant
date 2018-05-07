@@ -25,7 +25,9 @@ public class AdminController implements AdminAPI {
 
     @Override
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
-        //todo validate
+        if (productDTO.getCurrency() == null || productDTO.getName() == null || productDTO.getPrice() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         Product product = productService.createProduct(productDTO);
 
