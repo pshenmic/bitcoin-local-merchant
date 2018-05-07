@@ -39,8 +39,8 @@
             Sorry! Service is currently unavailable. Try again later.
           </p>
         </div>
+        <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown() && !isError()">
 
-        <div *ngIf="ordered && order && !isPaid() && !isExpired() && !isUnknown() && !isError">
           <div style="padding: 10px">
             <span>Price of {{order.product.name}}:</span>
             <p style="margin: 5px">
