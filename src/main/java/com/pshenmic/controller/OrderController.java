@@ -28,7 +28,7 @@ public class OrderController implements OrderAPI {
 
 
     @Override
-    public ResponseEntity<OrderDTO> getProduct(@PathVariable Long id) {
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long id) {
         Order order = orderService.getProductById(id);
 
         if (order == null) {

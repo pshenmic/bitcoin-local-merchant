@@ -5,6 +5,7 @@ import com.pshenmic.enums.Currency;
 import com.pshenmic.exception.OperationPriceExtractingException;
 import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.dto.OperationPriceDTO;
+import com.pshenmic.util.BitcoinMathContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class OperationPriceService {
                 throw new UnknownCurrencyException();
         }
 
-        operationPriceDTO.setBtcPrice(fiatPrice.divide(operationPriceDTO.getFiatRate(), MathContext.DECIMAL32));
+        operationPriceDTO.setBtcPrice(fiatPrice.divide(operationPriceDTO.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION));
 
         return operationPriceDTO;
     }

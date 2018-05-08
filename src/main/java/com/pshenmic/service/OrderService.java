@@ -10,6 +10,7 @@ import com.pshenmic.exception.OrderStatusMappingFailedException;
 import com.pshenmic.exception.UnknownCurrencyException;
 import com.pshenmic.model.electrum.SendRequest;
 import com.pshenmic.repository.OrderRepository;
+import com.pshenmic.util.BitcoinMathContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,7 @@ public class OrderService {
                 throw new UnknownCurrencyException();
         }
 
-        operationPrice.setBtcPrice(product.getPrice().divide(operationPrice.getFiatRate(), MathContext.DECIMAL32));
+        operationPrice.setBtcPrice(product.getPrice().divide(operationPrice.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION));
 
         Order order = new Order();
         order.setProduct(product);
