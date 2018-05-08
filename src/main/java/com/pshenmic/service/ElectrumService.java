@@ -19,8 +19,6 @@ import java.util.Arrays;
 @Service
 public class ElectrumService {
 
-    private final String electrumUrl = "http://127.0.0.1:7778";
-
     //in seconds
     private final int paymentTimeout = 900;
 

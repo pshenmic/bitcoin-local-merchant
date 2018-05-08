@@ -50,7 +50,7 @@ public class OrderService {
 
         switch (currency) {
             case USD:
-                operationPrice.setFiatRate(pricesService.getBtcUsdPrice());
+                operationPrice.setFiatRate(pricesService.getBtcUsdPrice().abs(BitcoinMathContext.BITCOIN_FRACTION));
                 break;
             default:
                 throw new UnknownCurrencyException();

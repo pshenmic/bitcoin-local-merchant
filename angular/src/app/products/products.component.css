@@ -13,7 +13,7 @@
   align-items: baseline;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .link {
@@ -24,5 +24,4 @@
 
 .product {
   padding: 10px;
-  width:30%;
 }

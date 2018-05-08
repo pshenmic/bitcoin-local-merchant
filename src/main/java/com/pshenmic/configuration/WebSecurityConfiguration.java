@@ -2,6 +2,7 @@ package com.pshenmic.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,11 +13,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+    @Value("${blm.admin.user}")
+    private String adminUsername;
+
+    @Value("${blm.admin.password}")
+    private String adminPassword;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("admin").password("Cnd#CNjdj32839").roles("ADMIN");
+                .withUser(adminUsername).password(adminPassword).roles("ADMIN");
     }
 
     @Override
