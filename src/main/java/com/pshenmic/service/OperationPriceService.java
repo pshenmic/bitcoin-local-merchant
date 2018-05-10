@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 @Service
 public class OperationPriceService {
@@ -33,8 +34,7 @@ public class OperationPriceService {
             default:
                 throw new UnknownCurrencyException();
         }
-
-        operationPriceDTO.setBtcPrice(fiatPrice.divide(operationPriceDTO.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION));
+        operationPriceDTO.setBtcPrice(fiatPrice.divide(operationPriceDTO.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION).setScale(8, RoundingMode.HALF_UP));
 
         return operationPriceDTO;
     }

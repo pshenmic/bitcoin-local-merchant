@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -50,13 +51,13 @@ public class OrderService {
 
         switch (currency) {
             case USD:
-                operationPrice.setFiatRate(pricesService.getBtcUsdPrice().abs(BitcoinMathContext.BITCOIN_FRACTION));
+                operationPrice.setFiatRate(pricesService.getBtcUsdPrice().setScale(8, RoundingMode.HALF_UP));
                 break;
             default:
                 throw new UnknownCurrencyException();
         }
 
-        operationPrice.setBtcPrice(product.getPrice().divide(operationPrice.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION));
+        operationPrice.setBtcPrice(product.getPrice().divide(operationPrice.getFiatRate(), BitcoinMathContext.BITCOIN_FRACTION).setScale(8, RoundingMode.HALF_UP));
 
         Order order = new Order();
         order.setProduct(product);
