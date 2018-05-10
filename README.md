@@ -1,1 +1,1 @@
-# bitcoin-shop
+# Bitcoin Shop
