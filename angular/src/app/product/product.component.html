@@ -58,6 +58,9 @@
               <div class="order_line address">
                 <span>{{order.address}}</span>
               </div>
+              <a [href]="paymentURL" *ngIf="paymentURL" class="payment_url">
+                <img src="../../assets/pay-with-bitcoin.png"/>
+              </a>
             </div>
           </div>
         </div>

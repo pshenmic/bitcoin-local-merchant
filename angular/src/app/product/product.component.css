@@ -167,7 +167,6 @@ footer {
   width: 120%;
 }
 
-
 .prices_box {
   display: flex;
   width: 300px;
@@ -183,15 +182,21 @@ footer {
   padding: 5px;
 }
 
-
-
 @media screen
 and (min-width: 120px)
-and (max-width: 320px)
-{
+and (max-width: 320px) {
   .prices_box {
     width: 95%;
   }
 
 }
 
+.payment_url img {
+  opacity: 0.9;
+  height: 100px;
+  cursor: pointer;
+}
+
+.payment_url img:hover, .payment_url img:active {
+  filter: hue-rotate(200deg) drop-shadow( 0 0 1px black);
+}

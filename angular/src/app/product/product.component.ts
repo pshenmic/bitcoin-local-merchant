@@ -6,6 +6,7 @@ import {Order} from "../model/order";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/interval';
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -22,9 +23,11 @@ export class ProductComponent implements OnInit {
   private order: Order;
   private orderId: number;
   private pathError: boolean;
+  private paymentURL: SafeUrl;
 
   constructor(private route: ActivatedRoute,
-              private restAPIService: RestAPIService) {
+              private restAPIService: RestAPIService, private sanitizer: DomSanitizer) {
+    this.paymentURL = null;
     route.params.subscribe((params => {
       console.log(params.id);
       if(this.isInt(params.id)) {
@@ -64,6 +67,12 @@ export class ProductComponent implements OnInit {
     this.error = error;
   }
 
+  private sanitizePaymentURL(order: Order) {
+    let amount = order.operationPrice.btcPrice;
+    let address = order.address;
+    this.paymentURL = this.sanitizer.bypassSecurityTrustUrl(`bitcoin:${address}?amount=${amount}`);
+  }
+
   public makeOrder(productId: number) {
     if(this.error != null) {
       return;
@@ -75,11 +84,13 @@ export class ProductComponent implements OnInit {
         this.order = order;
         //Magic line to override first status Unknown
         this.order.status = "PENDING";
+        this.sanitizePaymentURL(order);
         Observable.interval(5000)
           .subscribe(() => {
             this.restAPIService.getOrder(order.id).subscribe(
               order => {
                 this.order = order;
+                this.sanitizePaymentURL(order);
               },
               error => this.error = <any> error
             )
